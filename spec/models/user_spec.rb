@@ -5,6 +5,16 @@ RSpec.describe User, type: :model do
     it "Can Create & Validate" do
       expect( User.create(email: 'test@test.com', password: '123456') ).to_not be_valid
       expect( User.create(email: 'test@test.com', password: '123456', username: 'test') ).to be_valid
+
+      # testing uniqueness of username
+      expect( User.create(email: 'test@test.com', password: '123456', username: 'test') ).to_not be_valid
+    end
+  end
+
+  context "Check for AR Associations" do
+    it "Has Many Projects" do
+      user = User.create(email: 'test@test.com', password: '123456', username: 'test')
+      expect(user.projects).to eq([])
     end
   end
 end

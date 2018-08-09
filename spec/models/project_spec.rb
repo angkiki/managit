@@ -30,6 +30,10 @@ RSpec.describe Project, type: :model do
       @project_users2 = ProjectUser.find_by(project: @project, user: @user2)
       expect(@project_users2.status).to eq("pending")
     end
+
+    it "Has Many Feautres" do
+      expect(@project.features).to eq([])
+    end
   end
 
   context "Testing Model Methods" do
@@ -37,4 +41,5 @@ RSpec.describe Project, type: :model do
       expect(@project.find_owner).to eq(@user)
     end
   end
+  
 end

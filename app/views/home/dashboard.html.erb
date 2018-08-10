@@ -1,1 +1,11 @@
-<h1>Hi: <%= @user.username %>!</h1>
+<div class="container">
+  <h1 class="text-center">Hi: <%= @user.username %>!</h1>
+
+  <%= link_to 'New Project', new_project_path, class: 'btn btn-success btn-md' %>
+
+  <ul class="list-group">
+    <% @projects.each do |proj| %>
+      <li class="list-group-item"><%= proj.title %></li>
+    <% end %>
+  </ul>
+</div>

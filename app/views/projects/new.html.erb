@@ -1,0 +1,22 @@
+<div class="container">
+  <h2 class="text-center">New Project</h2>
+
+  <%= form_for @project do |f| %>
+
+    <div class="row">
+      <div class="col-md-6 ml-auto mr-auto">
+        <%= f.label :title %>
+        <%= f.text_field :title, placeholder: "Title of Project", class: "form-control", autofocus: true %>
+      </div>
+    </div>
+
+    <br />
+
+    <%= f.hidden_field :owner, value: current_user.id %>
+
+    <div align="center">
+      <%= f.submit 'Submit', class: "btn btn-primary btn-md" %>
+    </div>
+
+  <% end %>
+</div>

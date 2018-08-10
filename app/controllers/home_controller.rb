@@ -5,6 +5,7 @@ class HomeController < ApplicationController
 
   def dashboard
     @user = current_user
+    @projects = @user.projects
   end
 
 end

@@ -20,6 +20,13 @@ describe 'Full App Test' do
     expect(current_path).to eq(dashboard_path)
     expect(page).to have_content('Hi: angkiki!')
 
+    #       =============================================
+    #                     data check
+    #       =============================================
+    @user = User.last
+    expect(@user.username).to eq('angkiki')
+    expect(@user.email).to eq('angkiki@test.com')
+
     # ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~
     #        log out and log in to test rest of user actions
     # ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~
@@ -36,5 +43,30 @@ describe 'Full App Test' do
 
     expect(current_path).to eq(dashboard_path)
     expect(page).to have_content('Hi: angkiki!')
+
+    # ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~
+    #                   create a new project
+    # ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~
+    click_link 'New Project'
+    expect(current_path).to eq(new_project_path)
+
+    fill_in 'project_title', with: 'Karang Guni App'
+
+    click_button 'Submit', wait: 5
+
+    expect(current_path).to eq(dashboard_path)
+    expect(page).to have_content('Karang Guni App')
+
+    #       =============================================
+    #                     data check
+    #       =============================================
+    @project = Project.last
+    expect(@project.title).to eq('Karang Guni App')
+    expect(@project.find_owner).to eq(@user)
+    expect(@project.users.first).to eq(@user)
+
+    # ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~
+    #                   view project's features
+    # ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~
   end
 end

@@ -7,4 +7,9 @@ Rails.application.routes.draw do
   #            home controller
   # ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~
   get 'dashboard', to: 'home#dashboard'
+
+  # ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~
+  #          projects controller
+  # ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~
+  resources :projects, only: [:new, :create, :show]
 end

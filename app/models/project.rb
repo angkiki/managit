@@ -9,4 +9,8 @@ class Project < ApplicationRecord
   def find_owner
     @user = User.find(self.owner)
   end
+
+  def add_to_users(user)
+    self.users << user
+  end
 end

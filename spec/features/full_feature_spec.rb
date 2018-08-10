@@ -68,5 +68,9 @@ describe 'Full App Test' do
     # ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~
     #                   view project's features
     # ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~
+    click_link 'Karang Guni App'
+    expect(current_path).to eq( project_path(@project.id) )
+
+    
   end
 end

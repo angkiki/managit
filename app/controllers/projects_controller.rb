@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController
-  before_action :find_project, only: [:show]
+  # before_action :find_project, only: [:show]
 
   def new
     @project = Project.new
@@ -20,6 +20,7 @@ class ProjectsController < ApplicationController
   end
 
   def show
+    @project = Project.includes(:features).find(params[:id])
   end
 
   private

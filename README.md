@@ -1,9 +1,10 @@
 # manaGit
 
 ### TODO:
-1. Invite other users to the project
-2. Assign new feature to them
-3. Allow users to mark features as completed 
+1. User accepts project invitation
+2. Assign other features to user
+3. User update feature to completed
+4. Conditionally rendered views
 
 ### Completed:
 * Rspec (TDD)

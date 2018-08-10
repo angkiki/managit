@@ -1,14 +1,9 @@
 # manaGit
 
 ### TODO:
-1. User registration and login [done]
-2. Create dashboard for users (change after_sign_in_path for devise) [done]
-3. Display projects on dashboard (display current projects & pending invitations)
-4. Create new projects
-5. Invite other users to project
-6. Create new features
-7. Assign features to users
-8. Update status of features that belongs to user
+1. Invite other users to the project
+2. Assign new feature to them
+3. Allow users to mark features as completed 
 
 ### Completed:
 * Rspec (TDD)

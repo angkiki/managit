@@ -71,6 +71,27 @@ describe 'Full App Test' do
     click_link 'Karang Guni App'
     expect(current_path).to eq( project_path(@project.id) )
 
-    
+    # ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~
+    #                 create new project's features
+    # ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~
+    click_link 'New Feature', wait: 5
+    expect(current_path).to eq( new_feature_path(proj_id: @project.id) )
+
+    fill_in 'feature_name', with: 'Feature 1'
+    select( 'pending', from: 'feature_status' ).select_option
+    select( 'angkiki', from: 'feature_user_id' ).select_option
+
+    click_button 'Submit', wait: 5
+
+    expect(current_path).to eq( project_path(@project.id) )
+
+    #       =============================================
+    #                     data check
+    #       =============================================
+    @feature = Feature.last
+    expect(@feature.user).to eq(@user)
+    expect(@feature.project).to eq(@project)
+    expect(@feature.name).to eq('Feature 1')
+    expect(@feature.status).to eq('pending')
   end
 end

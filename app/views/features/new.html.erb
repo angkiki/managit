@@ -1,0 +1,40 @@
+<div class="container">
+  <h2 class="text-center">New Feature</h2>
+
+  <br />
+
+  <%= form_for @feature do |f| %>
+    <div class="row">
+      <div class="col-md-6 ml-auto mr-auto">
+        <%= f.label :name %>
+        <%= f.text_field :name, class: "form-control", autofocus: true, placeholder: "Name of Feature" %>
+      </div>
+    </div>
+
+    <br />
+
+    <div class="row">
+      <div class="col-md-6 ml-auto mr-auto">
+        <%= f.label :status, 'Type of Feature' %>
+        <%= f.select :status, Feature.relevant_status, { prompt: "Select Feature: (Pending, Bug)" },  class: "form-control" %>
+      </div>
+    </div>
+
+    <br />
+
+    <%= f.hidden_field :project_id, value: @project.id %>
+
+    <div class="row">
+      <div class="col-md-6 ml-auto mr-auto">
+        <%= f.label :user_id, 'Assign to User' %>
+        <%= f.select :user_id, @users.collect { |u| [ u.username, u.id ] }, { prompt: "Select a user to assign this feature to" },  class: "form-control"  %>
+      </div>
+    </div>
+
+    <br />
+
+    <div align="center">
+      <%= f.submit 'Submit', class: "btn btn-md btn-primary" %>
+    </div>
+  <% end %>
+</div>

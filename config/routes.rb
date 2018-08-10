@@ -12,4 +12,10 @@ Rails.application.routes.draw do
   #          projects controller
   # ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~
   resources :projects, only: [:new, :create, :show]
+
+  # ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~
+  #          features controller
+  # ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~
+  get 'features/new/:proj_id', to: 'features#new', as: 'new_feature'
+  post 'features', to: 'features#create', as: 'features'
 end

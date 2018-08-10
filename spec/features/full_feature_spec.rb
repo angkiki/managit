@@ -93,5 +93,33 @@ describe 'Full App Test' do
     expect(@feature.project).to eq(@project)
     expect(@feature.name).to eq('Feature 1')
     expect(@feature.status).to eq('pending')
+
+    # ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~
+    #                 invite other users to join
+    # ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~
+
+    # create a user to be invited first
+    @tank = User.create(email: 'tank@test.com', password: '123456', username: 'tank')
+
+    click_link 'Invite User', wait: 5
+    expect(current_path).to eq( invite_users_path(@project.id) )
+
+    # invalid user first
+    fill_in 'username_or_email', with: 'tanker'
+    click_button 'Submit', wait: 5
+
+    expect(page).to have_content('User Could Not Be Found')
+
+    # valid user
+    fill_in 'username_or_email', with: 'tank'
+    click_button 'Submit', wait: 5
+
+    expect(page).to have_content("Successfully Invited User: #{@tank.username}")
+
+    #       =============================================
+    #                     data check
+    #       =============================================
+    expect(@tank.projects.first).to eq(@project)
+    expect( ProjectUser.find_by(user_id: @tank.id, project_id: @project.id).status ).to eq('pending')
   end
 end

@@ -1,0 +1,24 @@
+<div class="container">
+  <h2 class="text-center">Invite other Users to join <%= @project.title %></h2>
+
+  <br />
+
+  <%= form_tag invite_users_create_path do %>
+
+    <div class="row">
+      <div class="col-md-6 ml-auto mr-auto">
+        <label for="invite_users">Enter a Username or Email (case sensitive)</label> <br />
+        <%= text_field_tag :username_or_email, nil, class: 'form-control', autofocus: true %>
+      </div>
+    </div>
+
+    <%= hidden_field_tag :project_id, @project.id %>
+
+    <br />
+
+    <div align="center">
+      <%= submit_tag 'Submit', class: 'btn btn-md btn-primary' %>
+    </div>
+
+  <% end %>
+</div>

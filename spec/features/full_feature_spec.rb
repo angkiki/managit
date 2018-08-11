@@ -12,6 +12,7 @@ describe 'Full App Test' do
     # => @tank: 'tank' (user)
     # => @project: 'Karang Guni App'
     # => @feature: 'Feature 1'
+    # => @update_feature: 'Feature 1' (after marking as completed)
     # => @bug: 'Bug 1'
     #
     # %%% %%% %%% %%% %%% %%% %%% %%%
@@ -223,6 +224,7 @@ describe 'Full App Test' do
     expect(page).to have_current_path( project_path(@project.id) )
     expect(page).to have_content('Feature 1')
     expect(page).to have_content('Bug 1')
+    expect(page).to have_content('Completed')
 
     #       =============================================
     #                     data check
@@ -232,5 +234,24 @@ describe 'Full App Test' do
     expect(@bug.project).to eq(@project)
     expect(@bug.name).to eq('Bug 1')
     expect(@bug.status).to eq('bugs')
+
+    # ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~
+    # ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~
+    #                 mark feature as completed
+    # ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~
+    # ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~
+    expect(page).to have_css("#com-feat-#{@feature.id}")
+
+    click_link "com-feat-#{@feature.id}", wait: 100
+
+    expect(page).to have_current_path( project_path(@project.id) )
+    expect(page).to have_content('Feature Mark As Completed')
+
+    @update_feature = Feature.find(@feature.id)
+
+    #       =============================================
+    #                     data check
+    #       =============================================
+    expect(@update_feature.status).to eq('completed')
   end
 end

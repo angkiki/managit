@@ -10,4 +10,14 @@ class Feature < ApplicationRecord
   def self.relevant_status
     self.statuses.first(2).map { |status| status[0] }
   end
+
+  # owner's name
+  def owner_name
+    @user = User.find(self.user_id)
+    @user.username
+  end
+
+  def is_owner_or_not(user)
+    self.user_id == user.id
+  end
 end

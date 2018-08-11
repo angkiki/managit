@@ -21,4 +21,5 @@ Rails.application.routes.draw do
   # ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~
   get 'features/new/:proj_id', to: 'features#new', as: 'new_feature'
   post 'features', to: 'features#create', as: 'features'
+  get 'features/:proj_id/completed/:feat_id', to: 'features#feature_completed', as: 'feature_completed'
 end

@@ -3,8 +3,8 @@
 ### TODO:
 1. User accepts project invitation [done]
 2. Assign other features to user [done]
-3. User update feature to completed
-4. Conditionally rendered views
+3. User update feature to completed [done]
+4. Conditionally rendered views [half done]
 5. Route restrictions
 
 ### Completed:

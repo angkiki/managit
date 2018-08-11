@@ -23,10 +23,12 @@ class ProjectsController < ApplicationController
     @project = Project.includes(:features).find(params[:id])
   end
 
+  # form for inviting other users to join project
   def invite_users
     @project = Project.find(params[:id])
   end
 
+  # action for inserting other users into project
   def invite_users_create
     @user = User.find_by_email_or_username(params[:username_or_email])
 
@@ -39,6 +41,21 @@ class ProjectsController < ApplicationController
     else
       flash[:danger] = "User Could Not Be Found"
       redirect_to invite_users_path(params[:project_id])
+    end
+  end
+
+  # action for accepting project invitation
+  def accept_project_invitation
+    @project_user = ProjectUser.find_by(user_id: current_user.id, project_id: params[:proj_id])
+
+    if @project_user.status == 'pending'
+      @project_user.update_columns(status: 1)
+
+      flash[:success] = 'Accepted Project Invitation'
+      redirect_to dashboard_path
+    else
+      flash[:danger] = 'Invalid Action'
+      redirect_to dashboard_path
     end
   end
 

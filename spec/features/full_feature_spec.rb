@@ -242,10 +242,9 @@ describe 'Full App Test' do
     # ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~
     expect(page).to have_css("#com-feat-#{@feature.id}")
 
-    click_link "com-feat-#{@feature.id}", wait: 100
+    click_button "com-feat-#{@feature.id}"
 
     expect(page).to have_current_path( project_path(@project.id) )
-    expect(page).to have_content('Feature Mark As Completed')
 
     @update_feature = Feature.find(@feature.id)
 

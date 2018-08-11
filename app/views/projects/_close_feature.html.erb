@@ -1,5 +1,5 @@
 <%= form_tag feature_completed_path(proj_id: p.id, feat_id: f.id), remote: true do %>
 
-  <%= submit_tag 'Completed' %>
+  <%= submit_tag 'Completed', id: "com-feat-#{f.id}" %>
 
 <% end %>

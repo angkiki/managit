@@ -1,23 +1,10 @@
 # manaGit
 
 ### TODO:
-1. User accepts project invitation [done]
-2. Assign other features to user [done]
-3. User update feature to completed [done]
-4. Conditionally rendered views [half done]
-5. Route restrictions
+* Conditionally rendered views [half done]
+* Route restrictions
+* Add secure connection for action cable
+* Add redis and related code for heroku deployment for action cable
 
-### Completed:
-* Rspec (TDD)
-* Users (Devise)
-* User -> has_many -> Projects, through: project_users
-* Projects -> has_many -> Users, through: project_users
-* join_table -> project_users -> belongs_to :user, :project
-* User -> has_many -> Features
-* Project -> has_many -> Features
-
-### Schema:
-* Users: (defaults, username:string[unique])
-* Projects: (title:string, owner:integer)
-* ProjectUsers: (user:references, project:references, status:integer[enum] -> default: 0)
-* Features: (status:integer[enum], name:string, project:references, user:references)
+### Conditionally Rendered Views
+* Can only assign features to users who have accepted the invitation

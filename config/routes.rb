@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root 'home#home'
 
+  mount ActionCable.server, at: '/cable'
+
   # ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~
   #            home controller
   # ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~
@@ -21,5 +23,5 @@ Rails.application.routes.draw do
   # ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~
   get 'features/new/:proj_id', to: 'features#new', as: 'new_feature'
   post 'features', to: 'features#create', as: 'features'
-  get 'features/:proj_id/completed/:feat_id', to: 'features#feature_completed', as: 'feature_completed'
+  post 'features/:proj_id/completed/:feat_id', to: 'features#feature_completed', as: 'feature_completed'
 end

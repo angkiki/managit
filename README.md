@@ -2,7 +2,7 @@
 
 ### TODO:
 1. User accepts project invitation [done]
-2. Assign other features to user
+2. Assign other features to user [done]
 3. User update feature to completed
 4. Conditionally rendered views
 5. Route restrictions

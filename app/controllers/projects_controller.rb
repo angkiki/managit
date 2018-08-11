@@ -21,6 +21,9 @@ class ProjectsController < ApplicationController
 
   def show
     @project = Project.includes(:features).find(params[:id])
+
+    # owner will be boolean
+    @owner = @project.is_owner_or_not(current_user)
   end
 
   # form for inviting other users to join project

@@ -13,4 +13,8 @@ class Project < ApplicationRecord
   def add_to_users(user)
     self.users << user
   end
+
+  def is_owner_or_not(user)
+    self.owner == user.id
+  end
 end

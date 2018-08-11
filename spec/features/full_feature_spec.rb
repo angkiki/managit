@@ -2,8 +2,26 @@ require 'rails_helper'
 
 describe 'Full App Test' do
   it 'All Features', js: true do
+
+    # %%% %%% %%% %%% %%% %%% %%% %%%
+    # %%% %%% %%% %%% %%% %%% %%% %%%
+    #
+    #       INSTANCE VARIABLES
+    #
+    # => @user: 'angkiki' (user)
+    # => @tank: 'tank' (user)
+    # => @project: 'Karang Guni App'
+    # => @feature: 'Feature 1'
+    # => @bug: 'Bug 1'
+    #
+    # %%% %%% %%% %%% %%% %%% %%% %%%
+    # %%% %%% %%% %%% %%% %%% %%% %%%
+
+
+    # ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~
     # ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~
     #                starting with user registration
+    # ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~
     # ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~
     visit root_path
 
@@ -28,7 +46,9 @@ describe 'Full App Test' do
     expect(@user.email).to eq('angkiki@test.com')
 
     # ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~
+    # ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~
     #        log out and log in to test login user actions
+    # ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~
     # ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~
     click_link 'Log Out'
     expect(page).to have_current_path(root_path)
@@ -45,7 +65,9 @@ describe 'Full App Test' do
     expect(page).to have_content('Hi: angkiki!')
 
     # ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~
+    # ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~
     #                   create a new project
+    # ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~
     # ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~
     click_link 'New Project'
     expect(page).to have_current_path(new_project_path)
@@ -66,13 +88,17 @@ describe 'Full App Test' do
     expect(@project.users.first).to eq(@user)
 
     # ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~
+    # ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~
     #                   view project's features
+    # ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~
     # ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~
     click_link 'Karang Guni App'
     expect(page).to have_current_path( project_path(@project.id) )
 
     # ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~
+    # ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~
     #                 create new project's features
+    # ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~
     # ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~
     click_link 'New Feature', wait: 5
     expect(page).to have_current_path( new_feature_path(proj_id: @project.id) )
@@ -84,6 +110,7 @@ describe 'Full App Test' do
     click_button 'Submit', wait: 5
 
     expect(page).to have_current_path( project_path(@project.id) )
+    expect(page).to have_content('Feature 1')
 
     #       =============================================
     #                     data check
@@ -95,7 +122,9 @@ describe 'Full App Test' do
     expect(@feature.status).to eq('pending')
 
     # ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~
+    # ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~
     #                 invite other users to join
+    # ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~
     # ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~
 
     # @@@ @@@ @@@ @@@ @@@ @@@ @@@ @@@ @@@ @@@
@@ -129,7 +158,9 @@ describe 'Full App Test' do
     expect( ProjectUser.find_by(user_id: @tank.id, project_id: @project.id).status ).to eq('pending')
 
     # ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~
+    # ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~
     #   log out and login with tank to accept project invitation
+    # ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~
     # ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~
     click_link 'Log Out'
     expect(page).to have_current_path(root_path)
@@ -156,5 +187,50 @@ describe 'Full App Test' do
     #                     data check
     #       =============================================
     expect( ProjectUser.find_by(user_id: @tank.id, project_id: @project.id).status ).to eq('accepted')
+
+    # ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~
+    # ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~
+    #               log back in with owner to see if
+    #                 we can assign feature to tank
+    # ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~
+    # ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~
+    click_link 'Log Out'
+    expect(page).to have_current_path(root_path)
+
+    click_link 'Log In'
+    fill_in 'user_email', with: 'angkiki@test.com'
+    fill_in 'user_password', with: '123456'
+
+    click_button 'Log In', wait: 5
+
+    expect(page).to have_current_path(dashboard_path)
+
+    click_link 'Karang Guni App'
+    expect(page).to have_current_path( project_path(@project.id) )
+
+    # @@@ @@@ @@@ @@@ @@@ @@@ @@@ @@@ @@@ @@@
+    #       create new feature for tank
+    # @@@ @@@ @@@ @@@ @@@ @@@ @@@ @@@ @@@ @@@
+    click_link 'New Feature', wait: 5
+    expect(page).to have_current_path( new_feature_path(proj_id: @project.id) )
+
+    fill_in 'feature_name', with: 'Bug 1'
+    select( 'bug', from: 'feature_status' ).select_option
+    select( 'tank', from: 'feature_user_id' ).select_option
+
+    click_button 'Submit', wait: 5
+
+    expect(page).to have_current_path( project_path(@project.id) )
+    expect(page).to have_content('Feature 1')
+    expect(page).to have_content('Bug 1')
+
+    #       =============================================
+    #                     data check
+    #       =============================================
+    @bug = Feature.last
+    expect(@bug.user).to eq(@tank)
+    expect(@bug.project).to eq(@project)
+    expect(@bug.name).to eq('Bug 1')
+    expect(@bug.status).to eq('bugs')
   end
 end

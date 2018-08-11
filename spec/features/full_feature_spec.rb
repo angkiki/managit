@@ -8,7 +8,7 @@ describe 'Full App Test' do
     visit root_path
 
     click_link 'Sign Up'
-    expect(current_path).to eq(new_user_registration_path)
+    expect(page).to have_current_path(new_user_registration_path)
 
     fill_in 'user_username', with: 'angkiki'
     fill_in 'user_email', with: 'angkiki@test.com'
@@ -17,7 +17,7 @@ describe 'Full App Test' do
 
     click_button 'Sign Up', wait: 5
 
-    expect(current_path).to eq(dashboard_path)
+    expect(page).to have_current_path(dashboard_path)
     expect(page).to have_content('Hi: angkiki!')
 
     #       =============================================
@@ -28,33 +28,33 @@ describe 'Full App Test' do
     expect(@user.email).to eq('angkiki@test.com')
 
     # ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~
-    #        log out and log in to test rest of user actions
+    #        log out and log in to test login user actions
     # ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~
     click_link 'Log Out'
-    expect(current_path).to eq(root_path)
+    expect(page).to have_current_path(root_path)
 
     click_link 'Log In'
-    expect(current_path).to eq(new_user_session_path)
+    expect(page).to have_current_path(new_user_session_path)
 
     fill_in 'user_email', with: 'angkiki@test.com'
     fill_in 'user_password', with: '123456'
 
     click_button 'Log In', wait: 5
 
-    expect(current_path).to eq(dashboard_path)
+    expect(page).to have_current_path(dashboard_path)
     expect(page).to have_content('Hi: angkiki!')
 
     # ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~
     #                   create a new project
     # ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~
     click_link 'New Project'
-    expect(current_path).to eq(new_project_path)
+    expect(page).to have_current_path(new_project_path)
 
     fill_in 'project_title', with: 'Karang Guni App'
 
     click_button 'Submit', wait: 5
 
-    expect(current_path).to eq(dashboard_path)
+    expect(page).to have_current_path(dashboard_path)
     expect(page).to have_content('Karang Guni App')
 
     #       =============================================
@@ -69,13 +69,13 @@ describe 'Full App Test' do
     #                   view project's features
     # ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~
     click_link 'Karang Guni App'
-    expect(current_path).to eq( project_path(@project.id) )
+    expect(page).to have_current_path( project_path(@project.id) )
 
     # ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~
     #                 create new project's features
     # ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~
     click_link 'New Feature', wait: 5
-    expect(current_path).to eq( new_feature_path(proj_id: @project.id) )
+    expect(page).to have_current_path( new_feature_path(proj_id: @project.id) )
 
     fill_in 'feature_name', with: 'Feature 1'
     select( 'pending', from: 'feature_status' ).select_option
@@ -83,7 +83,7 @@ describe 'Full App Test' do
 
     click_button 'Submit', wait: 5
 
-    expect(current_path).to eq( project_path(@project.id) )
+    expect(page).to have_current_path( project_path(@project.id) )
 
     #       =============================================
     #                     data check
@@ -98,19 +98,25 @@ describe 'Full App Test' do
     #                 invite other users to join
     # ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~
 
-    # create a user to be invited first
+    # @@@ @@@ @@@ @@@ @@@ @@@ @@@ @@@ @@@ @@@
+    #    create a user to be invited first
+    # @@@ @@@ @@@ @@@ @@@ @@@ @@@ @@@ @@@ @@@
     @tank = User.create(email: 'tank@test.com', password: '123456', username: 'tank')
 
     click_link 'Invite User', wait: 5
-    expect(current_path).to eq( invite_users_path(@project.id) )
+    expect(page).to have_current_path( invite_users_path(@project.id) )
 
-    # invalid user first
+    # @@@ @@@ @@@ @@@ @@@ @@@ @@@ @@@ @@@ @@@
+    #         invalid user first
+    # @@@ @@@ @@@ @@@ @@@ @@@ @@@ @@@ @@@ @@@
     fill_in 'username_or_email', with: 'tanker'
     click_button 'Submit', wait: 5
 
     expect(page).to have_content('User Could Not Be Found')
 
-    # valid user
+    # @@@ @@@ @@@ @@@ @@@ @@@ @@@ @@@ @@@ @@@
+    #              valid user
+    # @@@ @@@ @@@ @@@ @@@ @@@ @@@ @@@ @@@ @@@
     fill_in 'username_or_email', with: 'tank'
     click_button 'Submit', wait: 5
 
@@ -121,5 +127,34 @@ describe 'Full App Test' do
     #       =============================================
     expect(@tank.projects.first).to eq(@project)
     expect( ProjectUser.find_by(user_id: @tank.id, project_id: @project.id).status ).to eq('pending')
+
+    # ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~
+    #   log out and login with tank to accept project invitation
+    # ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~
+    click_link 'Log Out'
+    expect(page).to have_current_path(root_path)
+
+    click_link 'Log In'
+    fill_in 'user_email', with: 'tank@test.com'
+    fill_in 'user_password', with: '123456'
+
+    click_button 'Log In', wait: 5
+
+    expect(page).to have_current_path(dashboard_path)
+    expect(page).to have_content('Pending Invitations')
+    expect(page).to have_content('Accept Invitation')
+
+    # @@@ @@@ @@@ @@@ @@@ @@@ @@@ @@@ @@@ @@@
+    #   click on link to accept invitation
+    # @@@ @@@ @@@ @@@ @@@ @@@ @@@ @@@ @@@ @@@
+    click_link 'Accept Invitation'
+
+    expect(page).to have_current_path(dashboard_path)
+    expect(page).to_not have_content('Accept Invitation')
+
+    #       =============================================
+    #                     data check
+    #       =============================================
+    expect( ProjectUser.find_by(user_id: @tank.id, project_id: @project.id).status ).to eq('accepted')
   end
 end

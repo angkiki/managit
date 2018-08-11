@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   resources :projects, only: [:new, :create, :show]
   get 'project/invite/:id', to: 'projects#invite_users', as: 'invite_users'
   post 'projects/invite', to: 'projects#invite_users_create', as: 'invite_users_create'
+  get 'project/invite/accept/:proj_id', to: 'projects#accept_project_invitation', as: 'accept_project_invitation'
 
   # ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~
   #          features controller

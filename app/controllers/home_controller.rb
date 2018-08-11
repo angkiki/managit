@@ -4,8 +4,9 @@ class HomeController < ApplicationController
   end
 
   def dashboard
-    @user = current_user
-    @projects = @user.projects
+    @projects = current_user.projects.includes(:project_users)
+    @accepted_projects = @projects.where('project_users.status = 1')
+    @pending_projects = @projects.where('project_users.status = 0')
   end
 
 end

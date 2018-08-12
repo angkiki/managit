@@ -1,0 +1,105 @@
+// @@@ @@@ @@@ @@@ @@@ @@@ @@@ @@@ @@@
+//       home.html.erb (start)
+// @@@ @@@ @@@ @@@ @@@ @@@ @@@ @@@ @@@
+
+#jumbotron {
+  background: asset-url('managit-jumbo.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 600px;
+  width: auto;
+}
+
+#jumbotron-overlay {
+  background-color: rgba(0,0,0,0.5);
+  height: 600px;
+  width: 100%;
+}
+
+#jumbo-title {
+  font-size: 42px;
+  color: white;
+  text-align: center;
+  padding-top: 200px;
+}
+
+#jumbo-title-small {
+  font-size: 14px;
+  display: block;
+  font-style: italic;
+}
+
+#jumbo-subtitle {
+  font-size: 28px;
+  color: white;
+  text-align: center;
+  padding-top: 20px;
+}
+
+#jumbo-login-button {
+  display: block;
+  width: 20%;
+  margin: 10px auto;
+  color: white;
+  border: 1px solid white;
+  border-radius: 15px;
+  background: transparent;
+  padding: 10px 15px;
+  text-align: center;
+}
+
+#jumbo-login-button:hover {
+  text-decoration: none;
+  background-color: black;
+}
+
+// @@@ @@@ @@@ @@@ @@@ @@@ @@@ @@@ @@@
+//        home.html.erb (end)
+// @@@ @@@ @@@ @@@ @@@ @@@ @@@ @@@ @@@
+
+
+
+
+
+
+
+
+
+
+// @@@ @@@ @@@ @@@ @@@ @@@ @@@ @@@ @@@
+//     dashboard.html.erb (start)
+// @@@ @@@ @@@ @@@ @@@ @@@ @@@ @@@ @@@
+
+#dashboard-header {
+  background: asset-url('dashboard-header.jpg');
+  height: 150px;
+  width: 100%;
+  background-position: bottom;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+#dashboard-header-title {
+  color: white;
+  font-size: 28px;
+  padding-top: 50px;
+  padding-right: 100px;
+  text-align: right;
+}
+
+#dashboard-new-project {
+  display: block;
+  width: 20%;
+  margin: 20px auto;
+  color: black;
+  border: 1px solid black;
+  border-radius: 15px;
+  padding: 10px 15px;
+  text-align: center;
+}
+
+#dashboard-new-project:hover {
+  text-decoration: none;
+  background-color: #50edab;
+}

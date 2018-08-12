@@ -16,21 +16,24 @@
 
   <div class="row">
     <div class="col-md-4 ml-auto mr-auto">
-      <h4 class="text-center">Pending Features</h4>
+      <h4 class="text-center show-features-header" id="pending-features">Pending Features</h4>
 
       <br />
 
       <ul class="list-group">
         <% @pending_features.each do |feat| %>
           <li class="list-group-item" id="uncompleted-feat-<%= feat.id %>">
-            <%= feat.name %>
 
-            <span class="badge badge-pill badge-info">
-              <%= feat.owner_name %>
-            </span>
+            <div class="features-info">
+              <%= feat.name %>
+
+              <span class="badge badge-pill badge-info">
+                <%= feat.owner_name %>
+              </span>
+            </div>
 
             <% if feat.is_owner_or_not(current_user) %>
-              <div id="close-feature-form-<%= feat.id %>">
+              <div class="close-feature-form-div" id="close-feature-form-<%= feat.id %>">
                 <%= render 'close_feature', p: @project, f: feat %>
               </div>
             <% end %>
@@ -40,21 +43,24 @@
     </div>
 
     <div class="col-md-4 ml-auto mr-auto">
-      <h4 class="text-center">Existing Bugs</h4>
+      <h4 class="text-center show-features-header" id="existing-bugs">Existing Bugs</h4>
 
       <br />
 
       <ul class="list-group">
         <% @bug_features.each do |feat| %>
           <li class="list-group-item" id="uncompleted-feat-<%= feat.id %>">
-            <%= feat.name %> |
 
-            <span class="badge badge-pill badge-info">
-              <%= feat.owner_name %>
-            </span>
+            <div class="features-info">
+              <%= feat.name %>
+
+              <span class="badge badge-pill badge-info">
+                <%= feat.owner_name %>
+              </span>
+            </div>
 
             <% if feat.is_owner_or_not(current_user) %>
-              <div id="close-feature-form-<%= feat.id %>">
+              <div class="close-feature-form-div" id="close-feature-form-<%= feat.id %>">
                 <%= render 'close_feature', p: @project, f: feat %>
               </div>
             <% end %>
@@ -64,7 +70,7 @@
     </div>
 
     <div class="col-md-4 ml-auto mr-auto">
-      <h4 class="text-center">Completed Features</h4>
+      <h4 class="text-center show-features-header" id="completed-features">Completed Features</h4>
 
       <br />
 

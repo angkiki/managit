@@ -1,0 +1,43 @@
+// @@@ @@@ @@@ @@@ @@@ @@@ @@@ @@@ @@@
+//       show.html.erb
+// @@@ @@@ @@@ @@@ @@@ @@@ @@@ @@@ @@@
+
+.show-features-header {
+  color: white;
+  border: 1px solid;
+  border-radius: 20px;
+  padding: 10px 15px;
+}
+
+#pending-features {
+  background-color: #dda11f;
+}
+
+#existing-bugs {
+  background-color: #c92222;
+}
+
+#completed-features {
+  background-color: #2ea542;
+}
+
+.features-info {
+  display: inline-block;
+}
+
+.close-feature-form-div {
+  margin-left: 20px;
+  display: inline-block;
+}
+
+
+// @@@ @@@ @@@ @@@ @@@ @@@ @@@ @@@ @@@
+//       _close_feature.html.erb
+// @@@ @@@ @@@ @@@ @@@ @@@ @@@ @@@ @@@
+
+.close-feature-button {
+  font-size: 16px;
+  color: white;
+  background-color: #2ea542;
+  border: none;
+}

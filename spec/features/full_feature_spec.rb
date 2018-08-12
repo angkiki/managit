@@ -37,7 +37,6 @@ describe 'Full App Test' do
     click_button 'Sign Up', wait: 5
 
     expect(page).to have_current_path(dashboard_path)
-    expect(page).to have_content('Hi: angkiki!')
 
     #       =============================================
     #                     data check
@@ -63,7 +62,6 @@ describe 'Full App Test' do
     click_button 'Log In', wait: 5
 
     expect(page).to have_current_path(dashboard_path)
-    expect(page).to have_content('Hi: angkiki!')
 
     # ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~
     # ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~

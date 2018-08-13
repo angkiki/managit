@@ -12,4 +12,5 @@
 ### Route Restrictions
 * dashboard
 * everything for projects
+* cannot visit show if not accepted invitation
 * everything for features

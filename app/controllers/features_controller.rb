@@ -25,11 +25,6 @@ class FeaturesController < ApplicationController
       @feature.update_columns(status: 2)
 
       ActionCable.server.broadcast('project_channel', feature: @feature)
-      # flash[:success] = "Feature Mark As Completed"
-      # redirect_to project_path(params[:proj_id])
-    else
-      # flash[:danger] = "Invalid Action"
-      # redirect_to project_path(params[:proj_id])
     end
   end
 

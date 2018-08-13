@@ -6,9 +6,6 @@ App.project = App.cable.subscriptions.create "ProjectChannel",
     # Called when the subscription has been terminated by the server
 
   received: (data) ->
-    # Called when there's incoming data on the websocket for this channel
-    # alert data.content
-    console.log data.feature
-    # unless data.feature.blank?
+    # Called when there's incoming data on the websocket for this channel)
     $('#close-feature-form-' + data.feature.id).remove()
     $('.completed-features-ul').append( $('#uncompleted-feat-' + data.feature.id) )

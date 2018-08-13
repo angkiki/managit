@@ -36,10 +36,4 @@ RSpec.describe Project, type: :model do
     end
   end
 
-  context "Testing Model Methods" do
-    it "Can Find Its Owner" do
-      expect(@project.find_owner).to eq(@user)
-    end
-  end
-  
 end

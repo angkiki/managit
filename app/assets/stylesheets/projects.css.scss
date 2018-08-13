@@ -33,22 +33,29 @@
 #new-feature-holder {
   display: none;
   z-index: 1;
-  position: absolute;
+  position: fixed;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
   background-color: rgba(0,0,0,0.5);
+  height: 100%;
+  width: 100%;
 }
 
 .new-feature-form {
   padding: 50px;
   background-color: white;
-  height: 70%;
+  height: 80%;
   width: 70%;
   border: 1px solid black;
   border-radius: 20px;
   margin: 50px auto;
+  overflow-y: scroll;
+}
+
+#close-new-feature-holder:hover {
+  cursor: pointer;
 }
 
 // @@@ @@@ @@@ @@@ @@@ @@@ @@@ @@@ @@@

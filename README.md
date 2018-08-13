@@ -4,6 +4,7 @@
 * Conditionally rendered views [half done]
 * Route restrictions
 * Add redis and related code for heroku deployment for action cable
+* Look into using service workers 
 
 ### Conditionally Rendered Views
 * Can only assign features to users who have accepted the invitation

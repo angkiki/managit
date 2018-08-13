@@ -1,6 +1,5 @@
 <div id="new-feature-holder">
   <div class="new-feature-form">
-
   </div>
 </div>
 
@@ -26,24 +25,9 @@
 
       <br />
 
-      <ul class="list-group">
+      <ul class="list-group pending-features-ul pending-<%= current_user.username %>">
         <% @pending_features.each do |feat| %>
-          <li class="list-group-item" id="uncompleted-feat-<%= feat.id %>">
-
-            <div class="features-info">
-              <%= feat.name %>
-
-              <span class="badge badge-pill badge-info">
-                <%= feat.owner_name %>
-              </span>
-            </div>
-
-            <% if feat.is_owner_or_not(current_user) %>
-              <div class="close-feature-form-div" id="close-feature-form-<%= feat.id %>">
-                <%= render 'close_feature', p: @project, f: feat %>
-              </div>
-            <% end %>
-          </li>
+          <%= render 'uncompleted_feature', feat: feat, proj: @project, user: current_user %>
         <% end %>
       </ul>
     </div>
@@ -53,24 +37,9 @@
 
       <br />
 
-      <ul class="list-group">
+      <ul class="list-group bug-features-ul pending-<%= current_user.username %>">
         <% @bug_features.each do |feat| %>
-          <li class="list-group-item" id="uncompleted-feat-<%= feat.id %>">
-
-            <div class="features-info">
-              <%= feat.name %>
-
-              <span class="badge badge-pill badge-info">
-                <%= feat.owner_name %>
-              </span>
-            </div>
-
-            <% if feat.is_owner_or_not(current_user) %>
-              <div class="close-feature-form-div" id="close-feature-form-<%= feat.id %>">
-                <%= render 'close_feature', p: @project, f: feat %>
-              </div>
-            <% end %>
-          </li>
+          <%= render 'uncompleted_feature', feat: feat, proj: @project, user: current_user %>
         <% end %>
       </ul>
     </div>
@@ -92,7 +61,11 @@
 
 <script type="text/javascript">
   $(document).ready( function() {
-    $('#new-feature-holder').on('click', '.close-feature-popup', () => {
+    $('#new-feature-holder').on('click', '#submit-new-feature-form', () => {
+      $('#new-feature-holder').fadeOut('1000');
+    });
+
+    $('#new-feature-holder').on('click', '#close-new-feature-holder', () => {
       $('#new-feature-holder').fadeOut('1000');
     });
   });

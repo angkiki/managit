@@ -12,13 +12,10 @@ class FeaturesController < ApplicationController
     @feature = Feature.new(feature_params)
 
     if @feature.save
-      # flash[:success] = "Created New Feature"
-      # redirect_to project_path(feature_params[:project_id])
-      respond_to { |format| format.js { render "features/success" } }
-    else
-      # flash[:danger] = @feature.errors.full_messages
-      # render :new
-      respond_to { |format| format.js { render "features/failure" } }
+      @feature.status == 'bugs' ? @type = 'bugs' : @type = 'pending'
+      @project = @feature.project
+      @user = @feature.user
+      ActionCable.server.broadcast('project_channel', feature: render_uncompleted_features(@feature, @project, @user), type: @type, username: @user.username, feature_id: @feature.id)
     end
   end
 
@@ -28,7 +25,7 @@ class FeaturesController < ApplicationController
     if @feature.status != 'completed'
       @feature.update_columns(status: 2)
 
-      ActionCable.server.broadcast('project_channel', feature: render_completed_features(@feature), feature_id: @feature.id)
+      ActionCable.server.broadcast('project_channel', feature: render_completed_features(@feature), feature_id: @feature.id, type: 'completed')
     end
   end
 
@@ -39,5 +36,9 @@ class FeaturesController < ApplicationController
 
     def render_completed_features(feature)
       render(partial: 'projects/completed_feature', locals: { feat: feature })
+    end
+
+    def render_uncompleted_features(feature, project, user)
+      render(partial: 'projects/uncompleted_feature', locals: { feat: feature, proj: project, user: user })
     end
 end

@@ -1,3 +1,9 @@
+<div id="new-feature-holder">
+  <div class="new-feature-form">
+
+  </div>
+</div>
+
 <div class="container">
   <h2 class="text-center">Features</h2>
 
@@ -6,7 +12,7 @@
   <% if @owner %>
 
     <div align="center">
-      <%= link_to 'New Feature', new_feature_path(proj_id: @project.id), class: "btn btn-success" %>
+      <%= link_to 'New Feature', new_feature_path(proj_id: @project.id), class: "btn btn-success", remote: true %>
       <%= link_to 'Invite User', invite_users_path(@project.id), class: "btn btn-primary" %>
     </div>
 
@@ -76,15 +82,18 @@
 
       <ul class="list-group completed-features-ul">
         <% @completed_features.each do |feat| %>
-          <li class="list-group-item" id="completed-#{feat.id}">
-            <%= feat.name %>
-
-            <span class="badge badge-pill badge-info">
-              <%= feat.owner_name %>
-            </span>
-          </li>
+          <%= render 'completed_feature', feat: feat %>
         <% end %>
       </ul>
     </div>
   </div>
 </div>
+
+
+<script type="text/javascript">
+  $(document).ready( function() {
+    $('#new-feature-holder').on('click', '.close-feature-popup', () => {
+      $('#new-feature-holder').fadeOut('1000');
+    });
+  });
+</script>

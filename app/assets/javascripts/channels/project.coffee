@@ -7,5 +7,6 @@ App.project = App.cable.subscriptions.create "ProjectChannel",
 
   received: (data) ->
     # Called when there's incoming data on the websocket for this channel)
-    $('#close-feature-form-' + data.feature.id).remove()
-    $('.completed-features-ul').append( $('#uncompleted-feat-' + data.feature.id) )
+    console.log("f.id: ",data.feature_id)
+    $('#uncompleted-feat-' + data.feature_id).remove()
+    $('.completed-features-ul').append( data.feature )

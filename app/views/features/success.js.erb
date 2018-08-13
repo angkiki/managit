@@ -1,0 +1,4 @@
+$("#new-feature-form").fadeOut('1000', () => {
+  $("#new-feature-form").html("<%= j render partial: 'features/success' %>");
+  $("#new-feature-form").fadeIn("1000");
+})

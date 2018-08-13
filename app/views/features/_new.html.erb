@@ -3,7 +3,7 @@
 
   <br />
 
-  <%= form_for @feature do |f| %>
+  <%= form_for @feature, remote: true do |f| %>
     <div class="row">
       <div class="col-md-6 ml-auto mr-auto">
         <%= f.label :name %>
@@ -34,7 +34,7 @@
     <br />
 
     <div align="center">
-      <%= f.submit 'Submit', class: "btn btn-md btn-primary" %>
+      <%= f.submit 'Submit', class: "btn btn-md btn-primary", id: 'submit-new-feature-form' %>
     </div>
   <% end %>
 </div>

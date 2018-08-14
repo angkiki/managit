@@ -12,6 +12,8 @@ class User < ApplicationRecord
 
   has_many :features
 
+  has_many :workers
+
   def self.find_by_email_or_username(input)
     if is_valid_email?(input)
       @user = User.find_by(email: input)

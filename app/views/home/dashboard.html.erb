@@ -1,3 +1,5 @@
+<button id="push-notification">Push</button>
+
 <div id="dashboard-header">
   <p id="dashboard-header-title">
     Manage Your Projects
@@ -78,5 +80,10 @@
         });
       });
     }
+
+    $('#push-notification').click( () => {
+      const url = 'workers/push/<%= current_user.id %>'
+      fetch(url);
+    })
   })
 </script>

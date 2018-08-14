@@ -24,4 +24,10 @@ Rails.application.routes.draw do
   get 'features/new/:proj_id', to: 'features#new', as: 'new_feature'
   post 'features', to: 'features#create', as: 'features'
   post 'features/:proj_id/completed/:feat_id', to: 'features#feature_completed', as: 'feature_completed'
+
+  # ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~
+  #          workers controller
+  # ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~
+  post 'workers/create/:user_id', to: 'workers#create_worker', as: 'create_worker'
+  get 'workers/push/:id', to: 'workers#push_notification', as: 'push_notification'
 end

@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   #            home controller
   # ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~
   get 'dashboard', to: 'home#dashboard'
+  get 'github/auth', to: 'home#github_auth', as: 'github_auth'
+  get 'github/callback', to: 'home#callback', as: 'github_callback'
 
   # ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~
   #          projects controller

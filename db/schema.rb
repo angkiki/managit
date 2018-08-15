@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_09_082506) do
+ActiveRecord::Schema.define(version: 2018_08_15_080912) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,12 +57,24 @@ ActiveRecord::Schema.define(version: 2018_08_09_082506) do
     t.inet "last_sign_in_ip"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "access_token"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  end
+
+  create_table "workers", force: :cascade do |t|
+    t.string "endpoint"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "p256dh"
+    t.string "auth"
+    t.index ["user_id"], name: "index_workers_on_user_id"
   end
 
   add_foreign_key "features", "projects"
   add_foreign_key "features", "users"
   add_foreign_key "project_users", "projects"
   add_foreign_key "project_users", "users"
+  add_foreign_key "workers", "users"
 end

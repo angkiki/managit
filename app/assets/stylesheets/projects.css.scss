@@ -2,6 +2,14 @@
 //       show.html.erb
 // @@@ @@@ @@@ @@@ @@@ @@@ @@@ @@@ @@@
 
+#user-status:hover {
+  cursor: pointer;
+}
+
+#user-status-holder {
+  display: none;
+}
+
 .show-features-header {
   color: white;
   border: 1px solid;

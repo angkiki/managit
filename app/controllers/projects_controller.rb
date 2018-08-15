@@ -1,6 +1,7 @@
 class ProjectsController < ApplicationController
   before_action :unauthorised_access
   before_action :owner_only, only: [:invite_users, :invite_users_create]
+  before_action :accepted_users_only, only: [:show]
 
   def new
     @project = Project.new
@@ -81,6 +82,16 @@ class ProjectsController < ApplicationController
     if @project.owner != current_user.id
       flash[:danger] = "Unauthorised Access"
       redirect_to root_path
+    end
+  end
+
+  def accepted_users_only
+    @project = Project.find(params[:id])
+    @project_user = ProjectUser.find(project_id: @project.id, user_id: current_user.id)
+
+    if @project_user.status == "pending"
+      flash[:danger] = "Unauthorised Access"
+      redirect_to dashboard_path
     end
   end
 end

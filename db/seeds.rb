@@ -11,17 +11,17 @@ tank = User.create(username: 'tank', email: 'tank@test.com', password: '123456')
 jodich = User.create(username: 'jodich', email: 'jodich@test.com', password: '123456')
 
 project = Project.create(title: 'Karang Guni App', owner: angkiki.id)
-project.users << [angkiki, tank, jodich]
+project.users << [angkiki, tank]
 
 pu1 = ProjectUser.find_by(project_id: project.id, user_id: tank.id)
 pu1.update_attributes(status: 1)
 
 features = [
-  ["Feature 1", "pending", angkiki.id],
-  ["Feature 2", "pending", angkiki.id],
-  ["Feature 3", "pending", angkiki.id],
-  ["Bug 1", "bugs", tank.id],
-  ["Feature 4", "pending", tank.id]
+  ["Implement Geocoder", "pending", angkiki.id],
+  ["Set Up Action Mailer", "pending", angkiki.id],
+  ["Settle Listings and Items Model", "pending", angkiki.id],
+  ["Devise is Not Working", "bugs", tank.id],
+  ["Set Up Devise for Buyers", "pending", tank.id]
 ]
 
 features.each do |f|

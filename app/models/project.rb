@@ -17,4 +17,8 @@ class Project < ApplicationRecord
   def get_confirmed_users
     self.users.select { |u| ProjectUser.find_by(user_id: u.id, project_id: self.id).status == "accepted" }
   end
+
+  def get_unconfirmed_users
+    self.users.select { |u| ProjectUser.find_by(user_id: u.id, project_id: self.id).status == "pending" }
+  end
 end

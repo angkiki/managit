@@ -26,10 +26,12 @@ class ProjectsController < ApplicationController
     # owner will be boolean
     @owner = @project.is_owner_or_not(current_user)
 
-    # pending features
     @pending_features = @project.features.where(status: 'pending')
     @bug_features = @project.features.where(status: 'bugs')
     @completed_features = @project.features.where(status: 'completed')
+
+    @confirmed_users = @project.get_confirmed_users
+    @unconfirmed_users = @project.get_unconfirmed_users
   end
 
   # form for inviting other users to join project

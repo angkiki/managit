@@ -1,5 +1,6 @@
 class ProjectsController < ApplicationController
-  # before_action :find_project, only: [:show]
+  before_action :unauthorised_access
+  before_action :owner_only, only: [:invite_users, :invite_users_create]
 
   def new
     @project = Project.new
@@ -68,11 +69,16 @@ class ProjectsController < ApplicationController
   end
 
   private
-    def project_params
-      params.require(:project).permit(:title, :owner)
-    end
+  def project_params
+    params.require(:project).permit(:title, :owner)
+  end
 
-    def find_project
-      @project = Project.find(params[:id])
+  def owner_only
+    @project = Project.find(params[:id])
+
+    if @project.owner != current_user.id
+      flash[:danger] = "Unauthorised Access"
+      redirect_to root_path
     end
+  end
 end

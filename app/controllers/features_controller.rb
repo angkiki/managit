@@ -1,4 +1,5 @@
 class FeaturesController < ApplicationController
+  before_action :unauthorised_access
 
   def new
     @feature = Feature.new
@@ -30,15 +31,23 @@ class FeaturesController < ApplicationController
   end
 
   private
-    def feature_params
-      params.require(:feature).permit(:name, :status, :project_id, :user_id)
-    end
+  def feature_params
+    params.require(:feature).permit(:name, :status, :project_id, :user_id)
+  end
 
-    def render_completed_features(feature)
-      render(partial: 'projects/completed_feature', locals: { feat: feature })
-    end
+  def render_completed_features(feature)
+    render(partial: 'projects/completed_feature', locals: { feat: feature })
+  end
 
-    def render_uncompleted_features(feature, project, user)
-      render(partial: 'projects/uncompleted_feature', locals: { feat: feature, proj: project, user: user })
+  def render_uncompleted_features(feature, project, user)
+    render(partial: 'projects/uncompleted_feature', locals: { feat: feature, proj: project, user: user })
+  end
+
+  def only_owner
+    @project = Project.find(params[:proj_id])
+
+    if @project.owner != current_user.id
+      return head(403)
     end
+  end
 end

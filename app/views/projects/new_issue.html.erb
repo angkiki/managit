@@ -1,0 +1,29 @@
+<div class="container">
+  <h2 class="text-center">New Issue</h2>
+
+  <br />
+
+  <%= form_tag create_issue_path(proj_id: @proj_id) do %>
+
+    <div class="row">
+      <div class="col-md-6 ml-auto mr-auto">
+        <%= text_field_tag :title, nil, placeholder: "Title of Issue", autofocus: true, class: "form-control" %>
+      </div>
+    </div>
+
+    <br />
+
+    <div class="row">
+      <div class="col-md-6 ml-auto mr-auto">
+        <%= text_field_tag :body, nil, placeholder: "Description of Issue", class: "form-control" %>
+      </div>
+    </div>
+
+    <br />
+
+    <div align="center">
+      <%= submit_tag 'Submit' %>
+    </div>
+
+  <% end %>
+</div>

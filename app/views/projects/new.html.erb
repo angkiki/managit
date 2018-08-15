@@ -12,6 +12,15 @@
 
     <br />
 
+    <div class="row">
+      <div class="col-md-6 ml-auto mr-auto">
+        <%= f.label :repo_name, 'Name of Repository on Github' %>
+        <%= f.text_field :repo_name, placeholder: "Name of Repository on Github", class: "form-control" %>
+      </div>
+    </div>
+
+    <br />
+
     <%= f.hidden_field :owner, value: current_user.id %>
 
     <div align="center">

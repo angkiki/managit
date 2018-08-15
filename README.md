@@ -3,8 +3,9 @@
 ### TODO:
 * Conditionally rendered views [half done]
 * Route restrictions
-* Add redis and related code for heroku deployment for action cable
-* Look into using service workers 
+* https://api.github.com
+* /repos/:owner/:repo
+* curl https://api.github.com/repos/angkiki/managit
 
 ### Conditionally Rendered Views
 * Can only assign features to users who have accepted the invitation

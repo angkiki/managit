@@ -1,5 +1,7 @@
 class ProjectsController < ApplicationController
-  # before_action :find_project, only: [:show]
+  require 'net/http'
+  require 'uri'
+  require 'json'
 
   def new
     @project = Project.new
@@ -29,6 +31,54 @@ class ProjectsController < ApplicationController
     @pending_features = @project.features.where(status: 'pending')
     @bug_features = @project.features.where(status: 'bugs')
     @completed_features = @project.features.where(status: 'completed')
+
+    # issues on github
+    @uri = URI.parse("https://api.github.com/repos/angkiki/managit/issues")
+    @response = Net::HTTP.get(@uri)
+    @issues = JSON.parse(@response)
+  end
+
+  # new issue on github form
+  def new_issue
+    @proj_id = params[:proj_id]
+  end
+
+  # handle form request from new_issue and post to github api
+  def create_issue
+    @project = Project.find(params[:proj_id])
+    # @repo_name = @project.repo_name
+
+    # @uri = URI.parse("https://api.github.com/repos/angkiki/managit/issues")
+    #
+    # @response = Net::HTTP.post_form(@uri, {
+    #     'title' => params[:title],
+    #     'body' => params[:body],
+    #     'access_token' => current_user.access_token
+    # })
+    #
+    # puts "response: #{@response}"
+
+    @uri = URI.parse("https://api.github.com/repos/angkiki/managit/issues?access_token=#{current_user.access_token}")
+
+    puts "URI: #{@uri}"
+
+    @http = Net::HTTP.new(@uri.host, @uri.port)
+    @http.use_ssl = true
+
+    @request = Net::HTTP::Post.new(@uri.request_uri)
+    @request["Accept"] = "application/vnd.github.symmetra-preview+json"
+    @request.form_data = {
+        'title' => params[:title],
+        'body' => params[:body]
+    }
+
+    @response = @http.request(@request)
+
+    puts "response: #{@response}"
+
+    # byebug
+
+    redirect_to project_path(@project)
   end
 
   # form for inviting other users to join project
@@ -69,7 +119,7 @@ class ProjectsController < ApplicationController
 
   private
     def project_params
-      params.require(:project).permit(:title, :owner)
+      params.require(:project).permit(:title, :owner, :repo_name)
     end
 
     def find_project

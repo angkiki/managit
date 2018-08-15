@@ -33,11 +33,6 @@ class HomeController < ApplicationController
     if params[:state] == session[:state]
 
       @uri = URI.parse("https://github.com/login/oauth/access_token")
-      @params = {
-        client_id: "893624586408ad9146c0",
-        client_secret: "1eaa7676b8eee9d5d6af1861224ac43914a519d2",
-        code: params[:code]
-      }
 
       @response = Net::HTTP.post_form(@uri, {
         'client_id' => "893624586408ad9146c0",

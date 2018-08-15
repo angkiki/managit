@@ -19,6 +19,8 @@ Rails.application.routes.draw do
   get 'project/invite/:id', to: 'projects#invite_users', as: 'invite_users'
   post 'projects/invite', to: 'projects#invite_users_create', as: 'invite_users_create'
   get 'project/invite/accept/:proj_id', to: 'projects#accept_project_invitation', as: 'accept_project_invitation'
+  get 'projects/:proj_id/new_issue', to: 'projects#new_issue', as: 'new_issue'
+  post 'projects/:proj_id/create_issue', to: 'projects#create_issue', as: 'create_issue'
 
   # ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~
   #          features controller

@@ -10,31 +10,38 @@
   display: none;
 }
 
-.show-features-header {
-  color: white;
-  border: 1px solid;
-  border-radius: 20px;
-  padding: 10px 15px;
-}
-
 #pending-features {
   background-color: #dda11f;
+  padding: 10px;
+  color: white;
+}
+
+.pending-features-ul, .bug-features-ul, .completed-features-ul {
+  color: black;
+  list-style: none;
+  padding: 5px;
+}
+
+.lg-item {
+  background-color: white;
+  padding: 10px;
+  margin: 10px;
+  border-radius: 10px;
 }
 
 #existing-bugs {
   background-color: #c92222;
+  padding: 10px;
+  color: white;
 }
 
 #completed-features {
   background-color: #2ea542;
+  padding: 10px;
+  color: white;
 }
 
 .features-info {
-  display: inline-block;
-}
-
-.close-feature-form-div {
-  margin-left: 20px;
   display: inline-block;
 }
 
@@ -66,13 +73,34 @@
   cursor: pointer;
 }
 
+
+// @@@ @@@ @@@ @@@ @@@ @@@ @@@ @@@ @@@
+//       _uncompleted_feature.html.erb
+// @@@ @@@ @@@ @@@ @@@ @@@ @@@ @@@ @@@
+
+.features-username {
+  color: white;
+  font-size: 12px;
+  padding: 2px 4px;
+  background-color: #4286f4;
+  display: block;
+  width: 80%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+
+
 // @@@ @@@ @@@ @@@ @@@ @@@ @@@ @@@ @@@
 //       _close_feature.html.erb
 // @@@ @@@ @@@ @@@ @@@ @@@ @@@ @@@ @@@
 
 .close-feature-button {
-  font-size: 16px;
+  font-size: 12px;
   color: white;
   background-color: #2ea542;
   border: none;
+  display: block;
+  width: 80%;
+  margin: 10px auto;
 }

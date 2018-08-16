@@ -1,16 +1,13 @@
-<li class="list-group-item" id="uncompleted-feat-<%= feat.id %>">
+<li class="lg-item" id="uncompleted-feat-<%= feat.id %>">
+  <%= feat.name %>
 
-  <div class="features-info">
-    <%= feat.name %>
+  <br /><br />
 
-    <span class="badge badge-pill badge-info">
-      <%= feat.owner_name %>
-    </span>
+  <div class="features-username">
+    <%= feat.owner_name %> - <%= feat.created_at.strftime("%-d/%-m/%Y") %>
   </div>
 
   <% if feat.is_owner_or_not(user) %>
-    <br />
-    
     <div class="close-feature-form-div" id="close-feature-form-<%= feat.id %>">
       <%= render 'projects/close_feature', p: proj, f: feat %>
     </div>

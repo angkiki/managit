@@ -67,39 +67,45 @@
 
       <div class="row">
         <div class="col-md-4 ml-auto mr-auto">
-          <h4 class="text-center show-features-header" id="pending-features">Pending Features</h4>
+          <div id="pending-features">
+            <h4 class="text-center show-features-header">Pending Features</h4>
 
-          <br />
+            <br />
 
-          <ul class="list-group pending-features-ul pending-<%= current_user.username %>">
-            <% @pending_features.each do |feat| %>
-              <%= render 'uncompleted_feature', feat: feat, proj: @project, user: current_user %>
-            <% end %>
-          </ul>
+            <ul class="pending-features-ul pending-<%= current_user.username %>">
+              <% @pending_features.each do |feat| %>
+                <%= render 'uncompleted_feature', feat: feat, proj: @project, user: current_user %>
+              <% end %>
+            </ul>
+          </div>
         </div>
 
         <div class="col-md-4 ml-auto mr-auto">
-          <h4 class="text-center show-features-header" id="existing-bugs">Existing Bugs</h4>
+          <div id="existing-bugs">
+            <h4 class="text-center show-features-header">Existing Bugs</h4>
 
-          <br />
+            <br />
 
-          <ul class="list-group bug-features-ul pending-<%= current_user.username %>">
-            <% @bug_features.each do |feat| %>
-              <%= render 'uncompleted_feature', feat: feat, proj: @project, user: current_user %>
-            <% end %>
-          </ul>
+            <ul class="list-group bug-features-ul pending-<%= current_user.username %>">
+              <% @bug_features.each do |feat| %>
+                <%= render 'uncompleted_feature', feat: feat, proj: @project, user: current_user %>
+              <% end %>
+            </ul>
+          </div>
         </div>
 
         <div class="col-md-4 ml-auto mr-auto">
-          <h4 class="text-center show-features-header" id="completed-features">Completed Features</h4>
+          <div id="completed-features">
+            <h4 class="text-center show-features-header">Completed Features</h4>
 
-          <br />
+            <br />
 
-          <ul class="list-group completed-features-ul">
-            <% @completed_features.each do |feat| %>
-              <%= render 'completed_feature', feat: feat %>
-            <% end %>
-          </ul>
+            <ul class="list-group completed-features-ul">
+              <% @completed_features.each do |feat| %>
+                <%= render 'completed_feature', feat: feat %>
+              <% end %>
+            </ul>
+          </div>
         </div>
       </div>
 
@@ -111,14 +117,16 @@
 
       <%= form_for @new_message, remote: true do |f| %>
 
-        <div id="notice-board-form-holder">
-          <%= f.text_field :message, placeholder: 'Enter Notice Here', id: 'notice-board-message' %>
+        <div class="input-group" id="notice-board-form-holder">
+          <%= f.text_field :message, placeholder: 'Enter Notice Here', class: 'form-control', id: 'notice-board-message' %>
 
           <%= f.hidden_field :user_id, value: current_user.id %>
           <%= f.hidden_field :project_id, value: @project.id %>
           <br />
 
-          <%= f.submit 'Send', id: 'notice-board-send' %>
+          <span class="input-btn-group">
+            <%= f.submit 'Send', class: 'btn btn-default', id: 'notice-board-send' %>
+          </span>
         </div>
 
       <% end %>

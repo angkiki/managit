@@ -1,7 +1,9 @@
-<li class="list-group-item" id="completed-#{feat.id}">
+<li class="lg-item" id="completed-#{feat.id}">
   <%= feat.name %>
 
-  <span class="badge badge-pill badge-info">
-    <%= feat.owner_name %>
-  </span>
+  <br /><br />
+
+  <div class="features-username">
+    <%= feat.owner_name %> - <%= feat.created_at.strftime("%-d/%-m/%Y") %>
+  </div>
 </li>

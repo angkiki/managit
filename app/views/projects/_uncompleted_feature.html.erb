@@ -4,7 +4,8 @@
   <br /><br />
 
   <div class="features-username">
-    <%= feat.owner_name %> - <%= feat.created_at.strftime("%-d/%-m/%Y") %>
+    <p><%= feat.owner_name %></p>
+    <p><%= feat.created_at.strftime("%-d/%-m/%Y") %></p>
   </div>
 
   <% if feat.is_owner_or_not(user) %>

@@ -10,35 +10,49 @@
   display: none;
 }
 
-#pending-features {
-  background-color: #dda11f;
-  padding: 10px;
-  color: white;
+.pending-features-ul, .bug-features-ul, .completed-features-ul {
+  padding: 5px;
+  // text-align: left;
 }
 
-.pending-features-ul, .bug-features-ul, .completed-features-ul {
+.pending-features-ul > li {
+  background-color: #f5cf05;
+  color: black;
+  padding: 18px 20px;
+  border-radius: 10px;
+  font-size: 15px;
+  text-align: left;
+  margin: 10px auto;
+  width: 100%;
+  list-style: none;
+}
+
+.bug-features-ul > li {
+  background-color: #fa3500;
   color: black;
   list-style: none;
-  padding: 5px;
-}
-
-.lg-item {
-  background-color: white;
-  padding: 10px;
-  margin: 10px;
+  padding: 18px 20px;
   border-radius: 10px;
+  font-size: 15px;
+  text-align: left;
+  margin: 10px auto;
+  width: 100%;
 }
 
-#existing-bugs {
-  background-color: #c92222;
-  padding: 10px;
-  color: white;
+.completed-features-ul > li {
+  background-color: #63bb64;
+  color: black;
+  list-style: none;
+  padding: 18px 20px;
+  border-radius: 10px;
+  font-size: 15px;
+  text-align: left;
+  margin: 10px auto;
+  width: 100%;
 }
 
-#completed-features {
-  background-color: #2ea542;
-  padding: 10px;
-  color: white;
+#nb-title {
+  margin-bottom: 25px;
 }
 
 .features-info {
@@ -79,14 +93,13 @@
 // @@@ @@@ @@@ @@@ @@@ @@@ @@@ @@@ @@@
 
 .features-username {
-  color: white;
   font-size: 12px;
-  padding: 2px 4px;
-  background-color: #4286f4;
-  display: block;
-  width: 80%;
-  margin: 0 auto;
-  text-align: center;
+  text-align: left;
+  color: black;
+}
+
+.features-username > p {
+  margin-bottom: 1px;
 }
 
 
@@ -97,10 +110,12 @@
 
 .close-feature-button {
   font-size: 12px;
-  color: white;
-  background-color: #2ea542;
-  border: none;
-  display: block;
-  width: 80%;
+  width: 50%;
   margin: 10px auto;
+  padding: 5px 10px;
+  display: block;
+}
+
+.close-feature-button:hover {
+  cursor: pointer;
 }

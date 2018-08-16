@@ -35,7 +35,7 @@ class ProjectsController < ApplicationController
     @unconfirmed_users = @project.get_unconfirmed_users
 
     @new_message = Message.new
-    @messages = @project.messages.order('created_at DESC')
+    @messages = @project.messages.order('created_at DESC').last(5)
   end
 
   # form for inviting other users to join project

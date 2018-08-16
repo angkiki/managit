@@ -70,8 +70,6 @@
           <div id="pending-features">
             <h4 class="text-center show-features-header">Pending Features</h4>
 
-            <br />
-
             <ul class="pending-features-ul pending-<%= current_user.username %>">
               <% @pending_features.each do |feat| %>
                 <%= render 'uncompleted_feature', feat: feat, proj: @project, user: current_user %>
@@ -84,8 +82,6 @@
           <div id="existing-bugs">
             <h4 class="text-center show-features-header">Existing Bugs</h4>
 
-            <br />
-
             <ul class="list-group bug-features-ul pending-<%= current_user.username %>">
               <% @bug_features.each do |feat| %>
                 <%= render 'uncompleted_feature', feat: feat, proj: @project, user: current_user %>
@@ -97,8 +93,6 @@
         <div class="col-md-4 ml-auto mr-auto">
           <div id="completed-features">
             <h4 class="text-center show-features-header">Completed Features</h4>
-
-            <br />
 
             <ul class="list-group completed-features-ul">
               <% @completed_features.each do |feat| %>
@@ -113,7 +107,7 @@
     </div>
 
     <div class="col-md-3">
-      <h4 class="text-center">Notice Board</h4>
+      <h4 class="text-center" id="nb-title">Notice Board</h4>
 
       <%= form_for @new_message, remote: true do |f| %>
 
@@ -130,6 +124,8 @@
         </div>
 
       <% end %>
+
+      <br />
 
       <ul class="list-group" id="notice-board">
         <% @messages.each do |m| %>

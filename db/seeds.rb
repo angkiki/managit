@@ -17,13 +17,13 @@ pu1 = ProjectUser.find_by(project_id: project.id, user_id: tank.id)
 pu1.update_attributes(status: 1)
 
 features = [
-  ["Implement Geocoder", "pending", angkiki.id],
-  ["Set Up Action Mailer", "pending", angkiki.id],
-  ["Settle Listings and Items Model", "pending", angkiki.id],
-  ["Devise is Not Working", "bugs", tank.id],
-  ["Set Up Devise for Buyers", "pending", tank.id]
+  ["Implement Geocoder", "pending", angkiki.id, Date.today.last_week],
+  ["Set Up Action Mailer", "pending", angkiki.id, Date.today - 5.days],
+  ["Settle Listings and Items Model", "pending", angkiki.id, Date.today - 4.days],
+  ["Devise is Not Working", "bugs", tank.id, Date.today - 4.days],
+  ["Set Up Devise for Buyers", "pending", tank.id, Date.today - 2.days]
 ]
 
 features.each do |f|
-  Feature.create(name: f[0], status: f[1], user_id: f[2], project_id: project.id)
+  Feature.create(name: f[0], status: f[1], user_id: f[2], project_id: project.id, created_at: f[3])
 end

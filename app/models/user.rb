@@ -11,6 +11,7 @@ class User < ApplicationRecord
   has_many :projects, through: :project_users
 
   has_many :features
+  has_many :messages
 
   def self.find_by_email_or_username(input)
     if is_valid_email?(input)

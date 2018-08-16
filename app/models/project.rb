@@ -3,6 +3,7 @@ class Project < ApplicationRecord
   has_many :users, through: :project_users
 
   has_many :features
+  has_many :messages
 
   validates_presence_of :title, :owner
 

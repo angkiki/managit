@@ -34,6 +34,10 @@ RSpec.describe Project, type: :model do
     it "Has Many Feautres" do
       expect(@project.features).to eq([])
     end
+
+    it "Has Many Messages" do
+      expect(@project.messages).to eq([])
+    end
   end
 
 end

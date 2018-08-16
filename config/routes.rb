@@ -24,4 +24,9 @@ Rails.application.routes.draw do
   get 'features/new/:proj_id', to: 'features#new', as: 'new_feature'
   post 'features', to: 'features#create', as: 'features'
   post 'features/:proj_id/completed/:feat_id', to: 'features#feature_completed', as: 'feature_completed'
+
+  # ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~
+  #          messages controller
+  # ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~   ~ ~ ~
+  resources :messages, only: [:create]
 end

@@ -22,7 +22,7 @@ class ProjectsController < ApplicationController
   end
 
   def show
-    @project = Project.includes(:features).find(params[:id])
+    @project = Project.includes(:features, :messages).find(params[:id])
 
     # owner will be boolean
     @owner = @project.is_owner_or_not(current_user)
@@ -33,6 +33,9 @@ class ProjectsController < ApplicationController
 
     @confirmed_users = @project.get_confirmed_users
     @unconfirmed_users = @project.get_unconfirmed_users
+
+    @new_message = Message.new
+    @messages = @project.messages.order('created_at DESC')
   end
 
   # form for inviting other users to join project
@@ -87,7 +90,7 @@ class ProjectsController < ApplicationController
 
   def accepted_users_only
     @project = Project.find(params[:id])
-    @project_user = ProjectUser.find(project_id: @project.id, user_id: current_user.id)
+    @project_user = ProjectUser.find_by(project_id: @project.id, user_id: current_user.id)
 
     if @project_user.status == "pending"
       flash[:danger] = "Unauthorised Access"

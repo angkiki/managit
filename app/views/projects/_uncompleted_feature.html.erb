@@ -9,6 +9,8 @@
   </div>
 
   <% if feat.is_owner_or_not(user) %>
+    <br />
+    
     <div class="close-feature-form-div" id="close-feature-form-<%= feat.id %>">
       <%= render 'projects/close_feature', p: proj, f: feat %>
     </div>

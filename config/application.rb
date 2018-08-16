@@ -17,5 +17,7 @@ module Managit
     # the framework and any gems in your application.
 
     config.action_cable.mount_path = '/websocket'
+
+    config.time_zone = "Singapore"
   end
 end

@@ -1,6 +1,6 @@
 class ProjectsController < ApplicationController
   before_action :unauthorised_access
-  before_action :owner_only, only: [:invite_users, :invite_users_create]
+  before_action :owner_only, only: [:invite_users]
   before_action :accepted_users_only, only: [:show]
 
   def new
